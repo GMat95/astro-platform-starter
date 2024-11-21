@@ -1,38 +1,48 @@
 ---
-import '../../src/styles/globals.css';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/800.css';
-import interFont400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
-import interFont800 from '@fontsource/inter/files/inter-latin-800-normal.woff2?url';
+import '~/assets/styles/tailwind.css';
 
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import { I18N } from 'astrowind:config';
 
-interface Props {
-    title: string;
+import CommonMeta from '~/components/common/CommonMeta.astro';
+import Favicons from '~/components/Favicons.astro';
+import CustomStyles from '~/components/CustomStyles.astro';
+import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
+import Metadata from '~/components/common/Metadata.astro';
+import SiteVerification from '~/components/common/SiteVerification.astro';
+import Analytics from '~/components/common/Analytics.astro';
+import BasicScripts from '~/components/common/BasicScripts.astro';
+
+// Comment the line below to disable View Transitions
+import { ViewTransitions } from 'astro:transitions';
+
+import type { MetaData as MetaDataType } from '~/types';
+
+export interface Props {
+  metadata?: MetaDataType;
 }
 
-const { title } = Astro.props;
+const { metadata = {} } = Astro.props;
+const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>{title}</title>
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="preload" as="font" type="font/woff2" href={interFont400} crossorigin />
-        <link rel="preload" as="font" type="font/woff2" href={interFont800} crossorigin />
-    </head>
-    <body class="antialiased text-white bg-[#355C7D]">
-        <div class="flex flex-col min-h-screen px-6 bg-grid-pattern sm:px-12">
-            <div class="flex flex-col w-full max-w-5xl mx-auto grow">
-                <Header />
-                <main class="grow"><slot /></main>
-                <Footer />
-            </div>
-        </div>
-    </body>
+<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+  <head>
+    <CommonMeta />
+    <Favicons />
+    <CustomStyles />
+    <ApplyColorMode />
+    <Metadata {...metadata} />
+    <SiteVerification />
+    <Analytics />
+
+    <!-- Comment the line below to disable View Transitions -->
+    <ViewTransitions fallback="swap" />
+  </head>
+
+  <body class="antialiased text-default bg-page tracking-tight">
+    <slot />
+
+    <BasicScripts />
+  </body>
 </html>

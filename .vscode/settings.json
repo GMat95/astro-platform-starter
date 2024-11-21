@@ -1,27 +1,15 @@
 {
-    "editor.tabSize": 4,
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-    },
-    "[yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[toml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.tabSize": 2
-    },
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "files.associations": {
-        "*.css": "tailwindcss",
-    }
+  "css.customData": ["./vscode.tailwind.json"],
+  "eslint.validate": ["javascript", "javascriptreact", "astro", "typescript", "typescriptreact"],
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "yaml.schemas": {
+    "./.vscode/astrowind/config-schema.json": "/src/config.yaml"
+  },
+  "eslint.useFlatConfig": true
 }
